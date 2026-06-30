@@ -43,8 +43,11 @@ public class ConsoleMenu
                     System.out.println(shelter.findBySpecies(selectedSpecies.name()));
                     break;
                 case 4:
-                    System.out.println("Available Animals");
-                    System.out.println(shelter.findAvailableAnimals());
+                    System.out.println("Available Animals:");
+                    for (Animal a : shelter.findAvailableAnimals())
+                    {
+                        System.out.println(a);
+                    }
                     break;
                 case 5:
                     System.out.println("Enter animal ID to adopt:");
@@ -92,6 +95,10 @@ public class ConsoleMenu
             case DOG:
                 Animal newDog = new Dog(new AnimalId(), name, age);
                 shelter.addAnimal(newDog);
+                break;
+            case FISH:
+                Animal newFish = new Fish(new AnimalId(), name, age);
+                shelter.addAnimal(newFish);
                 break;
         }
 
