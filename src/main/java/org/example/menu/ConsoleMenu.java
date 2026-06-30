@@ -1,25 +1,65 @@
 package org.example.menu;
 
-import org.example.model.Animal;
+import org.example.model.*;
 import org.example.shelter.Shelter;
 
 import java.util.Scanner;
 
-public class ConsoleMenu {
+public class ConsoleMenu
+{
     private final Shelter<Animal> shelter;
-    private final Scanner scanner =  new Scanner(System.in);
-    public ConsoleMenu(Shelter<Animal> shelter) {
+    private final Scanner scanner = new Scanner(System.in);
+
+    public ConsoleMenu(Shelter<Animal> shelter)
+    {
         this.shelter = shelter;
     }
 
-    public void start(){
-        // TODO:
-        // Show menu in a loop
-        // Read user input
-        // Call correct 'Shelter' methods based on selected option
+    public void start()
+    {
+        boolean menuActive = true;
+        while (menuActive)
+        {
+            printMenu();
+            int userInput = scanner.nextInt();
+
+            if (userInput == 0)
+                menuActive = false;
+
+            switch (userInput)
+            {
+                case 1:
+                    printAddMenu();
+                    break;
+                case 2:
+                    for (Animal a : shelter.getAllAnimals())
+                    {
+                        System.out.println(a);
+                    }
+                    break;
+                case 3:
+                    AnimalSpecies selectedSpecies = selectSpecies();
+                    System.out.println("Found Animals:");
+                    System.out.println(shelter.findBySpecies(selectedSpecies.name()));
+                    break;
+                case 4:
+                    System.out.println("Available Animals");
+                    System.out.println(shelter.findAvailableAnimals());
+                    break;
+                case 5:
+                    System.out.println("Enter animal ID to adopt:");
+                    String idInput = scanner.next();
+                    boolean success = shelter.markAsAdopted(idInput);
+                    System.out.println((success) ? "Animal Adopted Successfully" : "ID not found");
+                    break;
+            }
+            System.out.println();
+
+        }
     }
 
-    private void printMenu(){
+    private void printMenu()
+    {
         System.out.println("""
                 1. Add animal
                 2. List all animals
@@ -28,5 +68,54 @@ public class ConsoleMenu {
                 5. Mark animal as adopted
                 0. Exit
                 """);
+    }
+
+    private void printAddMenu()
+    {
+        AnimalSpecies selectedSpecies = selectSpecies();
+        System.out.println("Input Name: ");
+        String name = scanner.nextLine();
+
+        System.out.println("Input Age: ");
+        int age = scanner.nextInt();
+
+        switch (selectedSpecies)
+        {
+            case BIRD:
+                Animal newBird = new Bird(new AnimalId(), name, age);
+                shelter.addAnimal(newBird);
+                break;
+            case CAT:
+                Animal newCat = new Cat(new AnimalId(), name, age);
+                shelter.addAnimal(newCat);
+                break;
+            case DOG:
+                Animal newDog = new Dog(new AnimalId(), name, age);
+                shelter.addAnimal(newDog);
+                break;
+        }
+
+        System.out.println("Animal added succesfully");
+        System.out.println();
+
+    }
+
+    private AnimalSpecies selectSpecies()
+    {
+        System.out.println("Select Animal Species");
+
+        AnimalSpecies[] animalSpecies = AnimalSpecies.values();
+
+        int i = 1;
+
+        for (AnimalSpecies animalSpecie : animalSpecies)
+        {
+            System.out.println(i++ + ". " + animalSpecie);
+        }
+
+        int choice = scanner.nextInt();
+
+        scanner.nextLine();
+        return animalSpecies[choice - 1];
     }
 }

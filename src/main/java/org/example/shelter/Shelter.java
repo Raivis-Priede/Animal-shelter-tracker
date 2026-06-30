@@ -1,5 +1,6 @@
 package org.example.shelter;
 
+import org.example.model.AdoptionStatus;
 import org.example.model.Animal;
 
 import java.util.ArrayList;
@@ -13,21 +14,55 @@ public class Shelter <T extends Animal>{
     }
 
     public List<T> getAllAnimals(){
-        // TODO
-        return null;
+        List<T> allAnimals = new ArrayList<>();
+        allAnimals.addAll(animals);
+        return allAnimals;
     }
 
     public List<T> findBySpecies(String species){
-        // TODO
-        return null;
+        List<T> specificSpeciesList = new ArrayList<>();
+        for (T animal : animals)
+        {
+            if(animal.getSpecies().equalsIgnoreCase(species))
+            {
+                specificSpeciesList.add(animal);
+            }
+        }
+        return specificSpeciesList;
     }
 
-    public List<T> findAvailableAnimals(){
-        // TODO
-        return null;
+    public List<T> findAvailableAnimals()
+    {
+        List<T> availableAnimals = new ArrayList<>();
+
+        for (T animal : animals)
+        {
+            if (animal.getAdoptionStatus() == AdoptionStatus.AVAILABLE)
+                availableAnimals.add(animal);
+        }
+        return availableAnimals;
     }
 
-    public void markAsAdopted(String id){
-        // TODO
+    public boolean markAsAdopted(String id)
+    {
+        T animal = findById(id);
+        if(animal != null)
+        {
+            animal.markAsAdopted();
+            return true;
+        }
+        return false;
+    }
+
+    public T findById(String id)
+    {
+        for (T animal : animals)
+        {
+            if(animal.getId().toString().equals(id))
+            {
+                return animal;
+            }
+        }
+        return null;
     }
 }

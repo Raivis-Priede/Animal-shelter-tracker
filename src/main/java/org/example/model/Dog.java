@@ -5,6 +5,10 @@ public final class Dog extends Animal{
         super(id,name,age);
     }
 
+    public Dog(AnimalId id, String name)
+    {
+        super(id,name);
+    }
     @Override
     public String getSpecies(){
         return "Dog";
