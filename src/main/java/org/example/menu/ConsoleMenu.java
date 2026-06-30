@@ -55,6 +55,9 @@ public class ConsoleMenu
                     boolean success = shelter.markAsAdopted(idInput);
                     System.out.println((success) ? "Animal Adopted Successfully" : "ID not found");
                     break;
+                case 6:
+                    printSortMenu();
+                    break;
             }
             System.out.println();
 
@@ -69,8 +72,51 @@ public class ConsoleMenu
                 3. Find animals by species
                 4. List available animals
                 5. Mark animal as adopted
+                6. Sort animal list
                 0. Exit
                 """);
+    }
+    private void printSortMenu()
+    {
+        System.out.println("Select what way you want to sort the list");
+        System.out.println("1. Sort By Name");
+        System.out.println("2. Sort By Age");
+        System.out.println("3. Cancel");
+
+
+        boolean validChoice = false;
+        while (!validChoice)
+        {
+            int sortChoice = scanner.nextInt();
+
+            switch (sortChoice)
+            {
+                case 1:
+                    System.out.println("List Sorted By Name: ");
+                    for (Animal a : shelter.sortByName())
+                    {
+                        System.out.println(a);
+                    }
+                    validChoice = true;
+                    break;
+                case 2:
+                    System.out.println("List Sorted By Age: ");
+                    for (Animal a : shelter.sortByAge())
+                    {
+                        System.out.println(a);
+                    }
+                    validChoice = true;
+                    break;
+                case 3:
+                    System.out.println("Sorting Canceled!");
+                    validChoice = true;
+                    break;
+                default:
+                    System.out.println("Invalid Option! Please choose 1,2 or 3:");
+                    break;
+            }
+        }
+
     }
 
     private void printAddMenu()

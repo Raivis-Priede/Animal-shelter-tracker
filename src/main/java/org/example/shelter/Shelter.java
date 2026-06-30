@@ -4,22 +4,27 @@ import org.example.model.AdoptionStatus;
 import org.example.model.Animal;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Shelter <T extends Animal>{
+public class Shelter <T extends Animal>
+{
     private final List<T> animals = new ArrayList<>();
 
-    public void addAnimal(T animal){
+    public void addAnimal(T animal)
+    {
         animals.add(animal);
     }
 
-    public List<T> getAllAnimals(){
+    public List<T> getAllAnimals()
+    {
         List<T> allAnimals = new ArrayList<>();
         allAnimals.addAll(animals);
         return allAnimals;
     }
 
-    public List<T> findBySpecies(String species){
+    public List<T> findBySpecies(String species)
+    {
         List<T> specificSpeciesList = new ArrayList<>();
         for (T animal : animals)
         {
@@ -29,6 +34,20 @@ public class Shelter <T extends Animal>{
             }
         }
         return specificSpeciesList;
+    }
+    public List<T> sortByName()
+    {
+        List<T> sorted = new ArrayList<>(animals);
+        sorted.sort(Comparator.comparing(Animal::getName));
+
+        return sorted;
+    }
+    public List<T> sortByAge()
+    {
+        List<T> sorted = new ArrayList<>(animals);
+        sorted.sort(Comparator.comparingInt(Animal::getAge));
+
+        return sorted;
     }
 
     public List<T> findAvailableAnimals()
