@@ -1,8 +1,13 @@
-package org.example.model;
+package org.example.model.base;
 import lombok.Getter;
+import org.example.model.types.Bird;
+import org.example.model.types.Cat;
+import org.example.model.types.Dog;
+import org.example.model.types.Fish;
 
 @Getter
-public sealed abstract class Animal permits Dog,Cat,Bird,Fish {
+public sealed abstract class Animal permits Dog, Cat, Bird, Fish
+{
     private final AnimalId id;
     private String name;
     private int age;

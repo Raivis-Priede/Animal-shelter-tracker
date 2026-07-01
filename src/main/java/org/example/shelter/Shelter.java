@@ -1,7 +1,7 @@
 package org.example.shelter;
 
-import org.example.model.AdoptionStatus;
-import org.example.model.Animal;
+import org.example.model.base.AdoptionStatus;
+import org.example.model.base.Animal;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -56,8 +56,10 @@ public class Shelter <T extends Animal>
 
         for (T animal : animals)
         {
-            if (animal.getAdoptionStatus() == AdoptionStatus.AVAILABLE)
+            if (AdoptionStatus.AVAILABLE.equals(animal.getAdoptionStatus()))
+            {
                 availableAnimals.add(animal);
+            }
         }
         return availableAnimals;
     }

@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.base;
 
 public enum AnimalSpecies
 {

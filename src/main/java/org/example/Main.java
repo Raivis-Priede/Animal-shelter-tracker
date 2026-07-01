@@ -1,7 +1,11 @@
 package org.example;
 
 import org.example.menu.ConsoleMenu;
-import org.example.model.*;
+import org.example.model.base.Animal;
+import org.example.model.base.AnimalId;
+import org.example.model.types.Bird;
+import org.example.model.types.Cat;
+import org.example.model.types.Dog;
 import org.example.shelter.Shelter;
 
 public class Main {

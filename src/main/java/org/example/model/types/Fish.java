@@ -1,6 +1,10 @@
-package org.example.model;
+package org.example.model.types;
 
-public final class Fish extends Animal{
+import org.example.model.base.Animal;
+import org.example.model.base.AnimalId;
+
+public final class Fish extends Animal
+{
     public Fish(AnimalId id, String name, int age){
         super(id,name,age);
     }

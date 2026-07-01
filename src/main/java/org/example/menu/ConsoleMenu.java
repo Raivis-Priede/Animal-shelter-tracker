@@ -1,6 +1,12 @@
 package org.example.menu;
 
-import org.example.model.*;
+import org.example.model.base.Animal;
+import org.example.model.base.AnimalId;
+import org.example.model.base.AnimalSpecies;
+import org.example.model.types.Bird;
+import org.example.model.types.Cat;
+import org.example.model.types.Dog;
+import org.example.model.types.Fish;
 import org.example.shelter.Shelter;
 
 import java.util.Scanner;
@@ -24,8 +30,9 @@ public class ConsoleMenu
             int userInput = scanner.nextInt();
 
             if (userInput == 0)
+            {
                 menuActive = false;
-
+            }
             switch (userInput)
             {
                 case 1:
